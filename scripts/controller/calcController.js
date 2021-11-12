@@ -2,12 +2,6 @@ class CalcController {
 
     constructor() {
 
-        // "this" means that this variable is an attribute for this class
-
-        // "_" at the begining of the name of the variable is a convention to say 
-        // that the attribute is private although it has no functionality to effectively
-        // block the access to the attribute
-
         this._locale = 'pt-BR';
         this._displayCalcEl = document.querySelector("#display");
         this._dateEl = document.querySelector("#data");
@@ -15,17 +9,11 @@ class CalcController {
         this._currentDate;
 
         this.initialize();
+        this.initButtonsEvent();
 
     }
 
     initialize() {
-
-        // DOM = Document
-        // BOM = Browser
-        // Type "document" on console to see the DOM 
-        // Type dir(document) on console to see the DOM in objetc format
-        // Type "window" on console to see the BOM 
-        // "window.close()" on console will close the window
 
         this.setDisplayDateTime()
 
@@ -38,11 +26,20 @@ class CalcController {
 
     }
 
+    initButtonsEvent() {
+        let buttons = document.querySelectorAll("#buttons > g, #parts > g");
 
-initButtonsEvent() {
-    let buttons = document.querySelectorAll("#buttons > g, #parts > g");
-}
+        buttons.forEach((btn, index) => {
 
+            btn.addEventListener("click", e => {
+
+                console.log(btn.className.baseVal.replace("btn-",""));
+
+            })
+
+        })
+
+    }
 
     setDisplayDateTime() {
         this.displayDate = this.currentDate.toLocaleDateString(this._locale, {
