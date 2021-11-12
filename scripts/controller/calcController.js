@@ -16,13 +16,18 @@ class CalcController {
     initialize() {
 
         this.setDisplayDateTime()
-
         setInterval(() => {
-
             this.setDisplayDateTime()
-
         }, 1000);
 
+
+    }
+
+    addEventListenerAll(element, events, fn) {
+
+        events.split(" ").forEach(event => {
+            element.addEventListener(event, fn, false);
+        })
 
     }
 
@@ -31,10 +36,12 @@ class CalcController {
 
         buttons.forEach((btn, index) => {
 
-            btn.addEventListener("click", e => {
+            this.addEventListenerAll(btn, "click drag ", e => {
+                console.log(btn.className.baseVal.replace("btn-", ""));
+            })
 
-                console.log(btn.className.baseVal.replace("btn-",""));
-
+            this.addEventListenerAll(btn, "mouseover mouseup mousedown", e => {
+                btn.style.cursor = "pointer";
             })
 
         })
